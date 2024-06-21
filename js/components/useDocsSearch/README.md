@@ -63,11 +63,12 @@ return {
 ## Demo
 [LIVE DEMO](https://sqlc-react-search.vercel.app/)
 
-We provide a simple example that shows how to use the component in the [example folder](https://github.com/sqlitecloud/sqlc-components/tree/main/packages/sqlc-react-search/example).
+We provide a simple example that shows how to use the component in the `tester.js` [file](https://github.com/sqlitecloud/examples/blob/main/js/components/useDocsSearch/src/tester.js).
 
 To run the example, download the repo and follow these steps:
-1. Run `npm install` at the root directory level.
-2. Run `npm run start` in the `./packages/sqlc-react-search/example` subdirectory.
+1. Navigate to the `/js/components/useDocsSearch` directory.
+2. Run `npm run install`.
+2. Run `npm run start`.
 
 The example code will be executed at `localhost:1234`
 
