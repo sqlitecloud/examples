@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "jsx": "react",
+    "outDir": "./dist",
+    "declaration": true,
+    "declarationDir": "./dist",
+    "module": "esnext",
+    "target": "es5",
+    "lib": ["dom", "es2015", "es2017", "esnext.asynciterable"],
+    "sourceMap": true,
+    "moduleResolution": "node"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

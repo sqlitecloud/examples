@@ -1,0 +1,20 @@
+{
+	"name": "use-docs-search-example",
+	"source": "./src/index.html",
+	"scripts": {
+		"start": "parcel",
+		"build": "rm -rf dist && parcel build"
+	},
+	"dependencies": {
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.24.7",
+		"@babel/preset-env": "^7.24.7",
+		"@babel/preset-react": "^7.24.7",
+		"buffer": "^6.0.3",
+		"parcel": "latest",
+		"process": "^0.11.10"
+	}
+}
