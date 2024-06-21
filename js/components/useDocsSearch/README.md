@@ -2,9 +2,9 @@
 
 ## Getting Started
 
-To use the search component, you need to initialize it by passing the URL of the edge function created from the dashboard. [More details below](#edge-function).
+To use the search component, [you need to initialize](#edge-function) it by passing the URL of the edge function created from the dashboard.
 
-```
+```js
 import { useDocsSearch } from ./index";
 
 function Search() {
@@ -37,15 +37,16 @@ function Search() {
 ## Typescript
 The following types can be imported and used:
 
-```
-import { useDocsSearch } from ./index";
+```ts
+import type { SearchResult, SearchError, SqlcSearchReturn } from "./index";
 ```
 
 
 ## Edge Function
 
-The code for the edge function to be created is as follows [(Edge Functions documentation)](https://docs.sqlitecloud.io/docs/introduction/edge_functions):
-```
+The code for the [edge function](https://docs.sqlitecloud.io/docs/introduction/edge_functions) to be created is as follows:
+
+```js
 const query = request.params.query;
 const requestid = request.params.requestid;
 return {
@@ -61,7 +62,7 @@ return {
 
 
 ## Demo
-[LIVE DEMO](https://sqlc-react-search.vercel.app/)
+[LIVE DEMO](https://use-docs-search.vercel.app/)
 
 We provide a simple example that shows how to use the component in the `tester.js` [file](https://github.com/sqlitecloud/examples/blob/main/js/components/useDocsSearch/src/tester.js).
 
