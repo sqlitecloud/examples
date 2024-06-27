@@ -11,6 +11,9 @@ function useDocsSearch(searchUrl: string): DocsSearchReturn {
 	// State to store search results
 	const [searchRes, setSearchRes] = useState<SearchResult>({ data: [] });
 
+	// State to store search results
+	const [searchResPrev, setSearchResPrev] = useState<SearchResult>({ data: [] });
+
 	// State to track the last search request ID
 	const [lastSearchId, setLastSearchId] = useState<number>(0);
 	const lastSearchIdRef = useRef<number>(lastSearchId);
@@ -78,6 +81,7 @@ function useDocsSearch(searchUrl: string): DocsSearchReturn {
 					if (parseInt(requestId) > parseInt(lastRequestIdRef.current.toString())) {
 						lastRequestIdRef.current = requestId;
 						setLastRequestId(lastRequestIdRef.current);
+						setSearchResPrev(structuredClone(searchRes));
 						setSearchRes(res);
 					}
 				} else {
@@ -100,6 +104,7 @@ function useDocsSearch(searchUrl: string): DocsSearchReturn {
 			// Reset state if query is empty
 			lastRequestIdRef.current = lastSearchIdRef.current;
 			setLastRequestId(lastSearchIdRef.current);
+			setSearchResPrev(structuredClone(searchRes));
 			setSearchRes({ data: [] });
 			setSearchError(undefined);
 		}
@@ -118,6 +123,7 @@ function useDocsSearch(searchUrl: string): DocsSearchReturn {
 	// Return the hook's state and handler functions
 	return {
 		searchRes,
+		searchResPrev,
 		searchText,
 		searchError,
 		validSearchUrl,

@@ -17,6 +17,7 @@ function UseSqlcSearchTester() {
 	const {
 		searchText,    // Text to search for
 		searchRes,     // Search results
+		searchResPrev,  // Search results for the previous searchText
 		searchError,   // Error information if search fails
 		validSearchUrl,// Boolean indicating if the search URL is valid
 		isLoading,     // Boolean indicating if component is loading search result

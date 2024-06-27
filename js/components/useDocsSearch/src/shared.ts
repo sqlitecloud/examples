@@ -20,6 +20,7 @@ export interface SearchError {
 export interface DocsSearchReturn {
 	searchRes: SearchResult;
 	searchText: string;
+	searchResPrev: string;
 	searchError: SearchError;
 	validSearchUrl: boolean;
 	isLoading: boolean;
