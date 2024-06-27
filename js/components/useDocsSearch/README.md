@@ -12,11 +12,12 @@ function Search() {
 
   // Initialize the useSqlcSearch custom hook
   const {
-    searchText,    // Text to search for
-    searchRes,     // Search results
-    searchError,   // Error information if search fails
-    validSearchUrl,// Boolean indicating if the search URL is valid
-    handleSearch,  // Function to handle search input changes
+    searchText,     // Text to search for
+    searchRes,      // Search results
+    searchError,    // Error information if search fails
+    validSearchUrl, // Boolean indicating if the search URL is valid
+		isLoading,      // Boolean indicating if component is loading search result
+		handleSearch,   // Function to handle search input changes
   } = useDocsSearch(searchUrl);
 
   return (

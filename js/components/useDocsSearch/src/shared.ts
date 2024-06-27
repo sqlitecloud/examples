@@ -22,5 +22,6 @@ export interface DocsSearchReturn {
 	searchText: string;
 	searchError: SearchError;
 	validSearchUrl: boolean;
+	isLoading: boolean;
 	handleSearch: (event: ChangeEvent<HTMLInputElement>) => Promise<void>;
 }

@@ -19,6 +19,7 @@ function UseSqlcSearchTester() {
 		searchRes,     // Search results
 		searchError,   // Error information if search fails
 		validSearchUrl,// Boolean indicating if the search URL is valid
+		isLoading,     // Boolean indicating if component is loading search result
 		handleSearch,  // Function to handle search input changes
 	} = useDocsSearch(searchUrl);
 
@@ -77,7 +78,7 @@ function UseSqlcSearchTester() {
 						<>
 							{/* Display search results */}
 							<p className="text-lg font-semibold mb-4 text-gray-700">
-								Number of results: {searchRes.data.length}
+								Number of results: {isLoading ? "loading ..." : searchRes.data.length}
 							</p>
 							<div className="bg-gray-100 p-4 rounded-lg max-h-64 overflow-auto text-sm text-gray-800 whitespace-pre-wrap">
 								<pre>{JSON.stringify(searchRes, null, 2)}</pre>

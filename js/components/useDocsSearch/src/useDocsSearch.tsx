@@ -31,6 +31,9 @@ function useDocsSearch(searchUrl: string): DocsSearchReturn {
 	// State to store the parsed URL object
 	const [url, setUrl] = useState<URL>(undefined);
 
+	// State to store the loading state
+	const [isLoading, setIsLoading] = useState<boolean>(false);
+
 	// Effect to validate and parse the search URL whenever it changes
 	useEffect(() => {
 		if (searchUrl) {
@@ -54,7 +57,7 @@ function useDocsSearch(searchUrl: string): DocsSearchReturn {
 	const search = async (query: string) => {
 		lastSearchIdRef.current += 1;
 		setLastSearchId(lastSearchIdRef.current);
-
+		setIsLoading(true);
 		if (query && url) {
 			// Perform search only if query is non-empty and URL is valid
 			try {
@@ -100,6 +103,7 @@ function useDocsSearch(searchUrl: string): DocsSearchReturn {
 			setSearchRes({ data: [] });
 			setSearchError(undefined);
 		}
+		setIsLoading(false);
 	};
 
 	/**
@@ -117,6 +121,7 @@ function useDocsSearch(searchUrl: string): DocsSearchReturn {
 		searchText,
 		searchError,
 		validSearchUrl,
+		isLoading,
 		handleSearch,
 	};
 }
