@@ -17,8 +17,8 @@ function Search() {
     searchResPrev,  // Search results for the previous searchText
     searchError,    // Error information if search fails
     validSearchUrl, // Boolean indicating if the search URL is valid
-		isLoading,      // Boolean indicating if component is loading search result
-		handleSearch,   // Function to handle search input changes
+    isLoading,      // Boolean indicating if component is loading search result
+    handleSearch,   // Function to handle search input changes
   } = useDocsSearch(searchUrl);
 
   return (
