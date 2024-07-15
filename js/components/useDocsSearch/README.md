@@ -53,7 +53,7 @@ const query = request.params.query;
 const requestid = request.params.requestid;
 return {
   data: {
-    search: await connection.sql`SELECT url, replace(snippet(documentation, -1, '<b>', '</b>', '...', 10), x'0A', ' ') as 'snippet' FROM documentation WHERE content MATCH concat(${query}, '*') ORDER BY rank LIMIT 256;`,
+    search: await connection.sql`SELECT url, options, replace(snippet(documentation, -1, '<b>', '</b>', '...', 10), x'0A', ' ') as 'snippet' FROM documentation WHERE content MATCH concat(${query}, '*') ORDER BY rank LIMIT 256;`,
     requestid: requestid
   }
 }
