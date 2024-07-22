@@ -64,8 +64,6 @@ return {
 
 
 ## Demo
-[LIVE DEMO](https://use-docs-search.vercel.app/)
-
 We provide a simple example that shows how to use the component in the `tester.js` [file](https://github.com/sqlitecloud/examples/blob/main/js/components/useDocsSearch/src/tester.js).
 
 To run the example, download the repo and follow these steps:
