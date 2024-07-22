@@ -2,7 +2,7 @@ import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import { Database } from '@sqlitecloud/drivers';
 
-const connStr = '<your-connection-string/databaseName>'
+const connStr = Bun.env.CONN_STR || 'sqlite:memory:';
 
 const db = new Database(connStr)
 
