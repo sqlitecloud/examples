@@ -7,7 +7,6 @@ const connStr = Bun.env.CONN_STR || ':memory:';
 const db = new Database(connStr);
 
 const typeDefs = `#graphql
-  # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
   type Album {
     AlbumId: Int
     Title: String
