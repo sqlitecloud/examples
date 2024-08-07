@@ -1,0 +1,37 @@
+{
+  "name": "geopoly",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "create-tables": "node src/helpers/createDatabase.js"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": [
+    "defaults",
+    "not ie 11"
+  ],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@mapbox/mapbox-gl-geocoder": "^5.0.2",
+    "@sqlitecloud/drivers": "^1.0.193",
+    "@turf/turf": "^7.0.0",
+    "mapbox-gl": "^3.5.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "dotenv": "^16.4.5"
+  }
+}
