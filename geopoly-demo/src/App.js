@@ -6,14 +6,12 @@ import { point, distance } from '@turf/turf';
 import { Database } from '@sqlitecloud/drivers';
 import { getBbox } from './helpers/getBbox.js';
 
-mapboxgl.accessToken =
-  'pk.eyJ1IjoidW5hdGFyYWphbiIsImEiOiJjbDFpcW82MGYxeDE1M2RwNjU4MmZ1YndsIn0.HyxwEtZz-pQ_7R6e48l0-g';
+mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
 function App() {
   const mapContainerRef = useRef();
   const mapRef = useRef();
 
-  // centers on Central Park, NYC
   const [lng, setLng] = useState(-73.9654897);
   const [lat, setLat] = useState(40.7824635);
   const [zoom, setZoom] = useState(12);
@@ -21,21 +19,21 @@ function App() {
   const [places, setPlaces] = useState([]);
   const [geometry, setGeometry] = useState([]);
 
-  const units = 'miles'; // default is 'kilometers'; can also be miles, degrees, or radians
+  const units = 'miles';
 
   async function queryGeopoly(searchedLng, searchedLat) {
     const db = new Database(process.env.REACT_APP_CONNECTION_STRING);
 
-    const db_name = 'geopoly-app';
+    const db_name = 'geopoly-demo';
 
-    const radius = 0.05; // must be non-negative
-    const sides = 50; // caps at 1000
-    // use coords to create a polygon to store in geopoly
+    const radius = 0.05;
+    const sides = 50;
+
     const polygonCoords =
       await db.sql`USE DATABASE ${db_name}; INSERT INTO polygons(_shape) VALUES(geopoly_regular(${searchedLng}, ${searchedLat}, ${radius}, ${sides})) RETURNING geopoly_json(_shape);`;
 
     const attractionsInPolygon =
-      await db.sql`USE DATABASE ${db_name}; SELECT name, coordinates FROM attractions WHERE geopoly_contains_point(${polygonCoords[0]['geopoly_json(_shape)']}, lng, lat);`; // here, lng and lat are the cols in the attractions table
+      await db.sql`USE DATABASE ${db_name}; SELECT name, coordinates FROM attractions WHERE geopoly_contains_point(${polygonCoords[0]['geopoly_json(_shape)']}, lng, lat);`;
 
     db.close();
 
@@ -65,11 +63,10 @@ function App() {
         },
       };
 
-      // (re-)apply markers for newly searched location
       const marker = document.createElement('div');
       marker.key = `marker-${attractionFeature.properties.id}`;
       marker.id = `marker-${attractionFeature.properties.id}`;
-      marker.className = 'marker'; // no css for this class; adding to enable removal later
+      marker.className = 'marker';
 
       marker.addEventListener('click', (e) => {
         handleClick(attractionFeature);
@@ -89,14 +86,12 @@ function App() {
       if (a.properties.distance < b.properties.distance) {
         return -1;
       }
-      return 0; // a must be equal to b
+      return 0;
     });
 
     setPlaces(attractionFeatures);
 
-    // if there is at least one attraction in the polygon
     if (attractionFeatures[0]) {
-      // create bounding box around searched location and closest attraction
       const bbox = getBbox(attractionFeatures, searchedLng, searchedLat);
       mapRef.current.fitBounds(bbox, {
         padding: 100,
@@ -134,7 +129,7 @@ function App() {
         type: 'geojson',
         data: {
           type: 'FeatureCollection',
-          features: geometry, // array of feature objects (polygon + attraction points)
+          features: geometry,
         },
       });
 
@@ -162,7 +157,7 @@ function App() {
     } else {
       mapRef.current.getSource(sourceId).setData({
         type: 'FeatureCollection',
-        features: geometry, // array of feature objects (polygon + attraction points)
+        features: geometry,
       });
     }
   }
@@ -237,13 +232,11 @@ function App() {
     mapRef.current.on('move', updateCoordinates);
 
     geocoder.on('result', (e) => {
-      // remove existing map markers
       const existingMarkers = document.getElementsByClassName('marker');
       while (existingMarkers[0]) {
         existingMarkers[0].remove();
       }
 
-      // remove existing popups
       const popUps = document.getElementsByClassName('mapboxgl-popup');
       while (popUps[0]) {
         popUps[0].remove();
@@ -253,7 +246,6 @@ function App() {
       queryGeopoly(lng, lat);
     });
 
-    // return effect cleanup function
     return () => {
       mapRef.current.removeControl(geocoder);
       mapRef.current.removeControl(fullscreenCtrl);
@@ -286,7 +278,6 @@ function App() {
             <div
               key={index}
               id={`listing-${place.properties.id}`}
-              // first item in the list is the closest, active by default
               className={`item ${index === 0 && 'active'}`}
             >
               <a href="#" className="title" onClick={() => handleClick(place)}>

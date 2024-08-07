@@ -1,16 +1,6 @@
 export function getBbox(sortedEvents, locationLng, locationLat) {
-  const lons = [
-    // closest event lng
-    sortedEvents[0].geometry.coordinates[0],
-    // searched location lng
-    locationLng,
-  ];
-  const lats = [
-    // closest event lat
-    sortedEvents[0].geometry.coordinates[1],
-    // searched location lat
-    locationLat,
-  ];
+  const lons = [sortedEvents[0].geometry.coordinates[0], locationLng];
+  const lats = [sortedEvents[0].geometry.coordinates[1], locationLat];
   const sortedLons = lons.sort((a, b) => {
     if (a > b) {
       return 1;

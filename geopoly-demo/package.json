@@ -7,7 +7,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "create-db": "node src/helpers/createDatabase.js"
+    "create-tables": "node src/helpers/createDatabase.js"
   },
   "eslintConfig": {
     "extends": [
