@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@100..900&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font: 400 15px/22px 'Inter Tight', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.legend {
+  padding: 10px;
+  background-color: #23374b;
+  color: #fff;
+  font-family: monospace;
+}
+
+.sidebar {
+  position: absolute;
+  width: 25%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.map-container {
+  position: absolute;
+  left: 25%;
+  width: 75%;
+  top: 0;
+  bottom: 0;
+}
+
+.heading {
+  padding: 0 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.listings {
+  height: 72%;
+  overflow: auto;
+  padding-bottom: 15px;
+}
+
+.listings .item {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.listings .item.active {
+  background-color: #cfe1f8;
+}
+
+.listings .item:last-child {
+  border-bottom: none;
+}
+
+.listings .item .title {
+  color: #5a5877;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.listings .item.active .title,
+.listings .item .title:hover {
+  color: #000;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #23374b;
+}
+
+.mapboxgl-popup {
+  padding-bottom: 20px;
+}
+
+.mapboxgl-popup-close-button {
+  display: none;
+}
+
+.mapboxgl-popup-content {
+  padding: 0;
+}
+
+.mapboxgl-popup-content h3 {
+  background: #cfe1f8;
+  color: #000;
+  margin: 0;
+  padding: 10px;
+  border-radius: 3px 3px 0 0;
+  font-weight: 700;
+  margin-top: -15px;
+}
+
+.mapboxgl-popup-content h4 {
+  margin: 0;
+  padding: 10px;
+  font-weight: 400;
+}
+
+.marker {
+  border: none;
+  cursor: pointer;
+  width: 26px;
+  height: 34px;
+  background-image: url('../images/attraction-pin.png');
+}
+
+.mapboxgl-ctrl-geocoder {
+  border: 0;
+  border-radius: 0;
+  position: relative;
+  top: 0;
+  width: 800px;
+  margin-top: 0;
+}
+
+.mapboxgl-ctrl-geocoder > div {
+  min-width: 100%;
+  margin-left: 0;
+}
