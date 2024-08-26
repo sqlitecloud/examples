@@ -212,14 +212,9 @@ class ObjectClient {
   }
 
   init() {
-    try {
-      const { error, message } = initializeObjectsTable(this.db);
-      if (error) {
-        throw new Error(message);
-      }
-      console.log(message);
-    } catch (err) {
-      console.error(err);
+    const { error, message } = initializeObjectsTable(this.db);
+    if (error) {
+      throw new Error(message);
     }
   }
 
