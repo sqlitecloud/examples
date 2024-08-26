@@ -1,0 +1,23 @@
+{
+  "name": "object-storage-wrapper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "objWrapper.js",
+  "scripts": {
+    "start": "ts-node main.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-s3": "^3.620.0",
+    "@sqlitecloud/drivers": "^1.0.193",
+    "dotenv": "^16.4.5",
+    "nodemon": "^3.1.4"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  }
+}
