@@ -5,7 +5,7 @@ import {
   PutObjectRequest,
   GetObjectRequest,
   ListObjectsRequest,
-  ListObjectsByDateRequest,
+  ListObjectsFromDateRequest,
   DeleteObjectRequest,
   CommandResponse,
   Command,
@@ -149,12 +149,12 @@ class ListObjectsCommand implements ListObjectsRequest, Command {
   }
 }
 
-class ListObjectsByDateCommand implements ListObjectsByDateRequest, Command {
+class ListObjectsFromDateCommand implements ListObjectsFromDateRequest, Command {
   bucket: string;
   from: string;
   to?: string;
 
-  constructor(params: ListObjectsByDateRequest) {
+  constructor(params: ListObjectsFromDateRequest) {
     this.bucket = params.bucket;
     this.from = params.from;
     this.to = params.to;
@@ -237,7 +237,7 @@ const main = async () => {
   });
   const listBuckets = new ListBucketsCommand();
   const listObjects = new ListObjectsCommand({ bucket: "documents" });
-  const listObjectsByDate = new ListObjectsByDateCommand({
+  const listObjectsFromDate = new ListObjectsFromDateCommand({
     bucket: "documents",
     from: "2024-07-29T10:29:00.000Z",
     to: "2024-07-29T19:00:00.000Z",
@@ -255,8 +255,8 @@ const main = async () => {
   console.log(listBucketsResponse);
   const listObjectsResponse = await objectStorage.send(listObjects);
   console.log(listObjectsResponse);
-  const listObjectsByDateResponse = await objectStorage.send(listObjectsByDate);
-  console.log(listObjectsByDateResponse);
+  const listObjectsFromDateResponse = await objectStorage.send(listObjectsFromDate);
+  console.log(listObjectsFromDateResponse);
   const deleteResponse = await objectStorage.send(deleteObject);
   console.log(deleteResponse);
 };
