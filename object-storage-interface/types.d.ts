@@ -30,7 +30,7 @@ export interface ListObjectsRequest {
   bucket: string;
 }
 
-export interface ListObjectsByDateRequest {
+export interface ListObjectsFromDateRequest {
   bucket: string;
   from: string;
   to?: string;
