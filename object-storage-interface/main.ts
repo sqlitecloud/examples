@@ -208,13 +208,17 @@ class ObjectClient {
 
   constructor(connStr: string) {
     this.db = new Database(connStr);
-    this.init();
   }
 
-  init() {
-    const { error, message } = initializeObjectsTable(this.db);
-    if (error) {
-      throw new Error(message);
+  async init() {
+    try {
+      const { error, message } = await initializeObjectsTable(this.db);
+      if (error) {
+        throw new Error(message);
+      }
+      console.log(message);
+    } catch (err) {
+      console.error(err);
     }
   }
 
@@ -247,6 +251,7 @@ const main = async () => {
     key: "FaceTime_User_Guide.pdf",
   });
 
+  await objectStorage.init()
   const putResponse = await objectStorage.send(putObject);
   console.log(putResponse);
   const getResponse = await objectStorage.send(getObject);

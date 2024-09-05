@@ -1,7 +1,9 @@
 import { Database } from "@sqlitecloud/drivers";
 
 // CREATE OBJECTS TABLE
-export const initializeObjectsTable = (db: Database) => {
+export const initializeObjectsTable = (
+  db: Database
+): Promise<{ error: Error | null; message: string }> => {
   const createTableStatement = `
     CREATE TABLE IF NOT EXISTS objects (
       id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 
@@ -16,13 +18,30 @@ export const initializeObjectsTable = (db: Database) => {
     CREATE INDEX IF NOT EXISTS idx_objects_bucket_key ON objects (bucket, key);
     CREATE INDEX IF NOT EXISTS idx_objects_key ON objects (key);
   `;
-  try {
-    db.run(createTableStatement);
-    console.log("Successfully created table or table already exists");
-    db.run(createIndexStatement);
-    console.log("Successfully created index or index already");
-    return { error: null, message: "Successfully created table and index" };
-  } catch (error) {
-    return { error, message: "Error creating table and index" };
-  }
+
+  return new Promise((resolve, reject) => {
+    db.run(createTableStatement, [], (tableError) => {
+      if (tableError) {
+        console.log("Error creating table", tableError);
+        return reject({ error: tableError, message: "Error creating table" });
+      } else {
+        console.log("Successfully created table or table already exists");
+        db.run(createIndexStatement, [], (indexError) => {
+          if (indexError) {
+            console.log("Error creating index", indexError);
+            return reject({
+              error: indexError,
+              message: "Error creating index",
+            });
+          } else {
+            console.log("Successfully created index or index already");
+            return resolve({
+              error: null,
+              message: "Successfully created table and index",
+            });
+          }
+        });
+      }
+    });
+  });
 };
