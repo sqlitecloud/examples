@@ -72,14 +72,20 @@ function send(
 }
 
 function renderLoginPage() {
-  return `<html><body>
+  return `<html>
+  <body>
     <a href="https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(
-    REDIRECT_URI
-  )}&scope=openid%20email%20profile&state=${STATE}">Login with Google</a>
-  </body></html>`;
+      REDIRECT_URI
+    )}&scope=openid%20email%20profile&state=${STATE}">
+      <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" 
+           alt="Sign in with Google" 
+           style="height:40px;" />
+    </a>
+  </body>
+</html>`;
 }
 
-async function getGoogleTokens(code: string) {  
+async function getGoogleTokens(code: string) {
   const params = new URLSearchParams();
   params.append("code", code);
   params.append("client_id", CLIENT_ID || "");
@@ -95,17 +101,17 @@ async function getGoogleTokens(code: string) {
   return res.json();
 }
 
-async function getSQLiteCloudToken(apikey: string) {
+async function getSQLiteCloudToken(userId: string) {
   const payload = {
-    name: "test-user-token",
-    userId: randomUUID(),
+    name: "test-user-token", // A name for the token, can be anything you want
+    userId,
     expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString(), // expires in 24 hours
   };
-  
+
   const res = await fetch(SQLITE_CLOUD_API_TOKENS, {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${apikey}`,
+      Authorization: `Bearer ${SQLITE_CLOUD_API_KEY}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
@@ -143,11 +149,12 @@ http
         // Store the Google Token in the database
         const googleToken = await getGoogleTokens(q.code as string);
 
+        // User ID can be any kind of resource you want to associate the Access Token to.
+        const userId = randomUUID();
+
         // Create a SQLite Cloud Access Token for the user
         // Store it securely, the token cannot be retrieved later
-        const sqliteCloudTokenData = await getSQLiteCloudToken(
-          SQLITE_CLOUD_API_KEY
-        );
+        const sqliteCloudTokenData = await getSQLiteCloudToken(userId);
 
         // Let the user to use the SQLite Cloud Access token
         // to access to SQLite Cloud API (eg, SQLite Sync, Weblite, etc)
