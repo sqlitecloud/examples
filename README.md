@@ -1,2 +1,3 @@
 # SQLite Cloud Examples Repo
-Examples, demos, and other useful code you can use to jumpstart your next project with SQLite Cloud.
+Explore examples, demos, and ready-to-use code to to jumpstart your next project with SQLite Cloud.  
+For more information visit the [official documentation](https://docs.sqlitecloud.io).
