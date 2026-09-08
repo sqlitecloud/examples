@@ -15,9 +15,9 @@ This project is built with Express.js and TypeScript and requires Node.js.
 
 ## How to Run
 
-1. If you don't have an account, create one at [SQLite Cloud](https://sqlitecloud.io) and obtain your **Connection String**.
+1. If you don't have an account, create one at [SQLite Cloud](https://sqlitecloud.io) and obtain your **Connection String**. From the **Weblite** panel of your project, also copy the base URL of the gateway serving the REST API.
 
-2. In the root of the project directory, rename the `.env.example` file to `.env` and set your **Connection String**.
+2. In the root of the project directory, rename the `.env.example` file to `.env`, then set your **Connection String** and the **gateway URL**.
 
 3. Go to the Google Cloud Console and obtain your Google OAuth credentials from [https://console.cloud.google.com/apis/credentials](https://console.cloud.google.com/apis/credentials).  
 Then copy the **Client ID** and **Client Secret** into the `.env` file.
