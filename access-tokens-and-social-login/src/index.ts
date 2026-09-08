@@ -16,7 +16,7 @@ const PORT = 3003;
 const PUBLIC_DIR = join(__dirname, "../public");
 
 /**
- * Parse the connection string to get node address and API Key
+ * Parse the connection string to get the API Key
  */
 const SQLITECLOUD_CONNECTION_STRING = process.env.SQLITECLOUD_CONNECTION_STRING;
 if (!SQLITECLOUD_CONNECTION_STRING) {
@@ -43,7 +43,17 @@ if (!CLIENT_ID || !CLIENT_SECRET) {
   );
 }
 
-const SQLITECLOUD_URL = `https://${sqlitecloudConnectionString.hostname}`;
+/**
+ * The REST API is served by the SQLite Cloud gateway, on a different host
+ * than the node the connection string points to.
+ */
+const SQLITECLOUD_URL = process.env.SQLITECLOUD_GATEWAY_URL;
+if (!SQLITECLOUD_URL) {
+  throw new Error(
+    "SQLITECLOUD_GATEWAY_URL environment variable is not set. Create the .env file from .env.example"
+  );
+}
+
 const SQLITE_CLOUD_API_TOKENS = SQLITECLOUD_URL + "/v2/tokens";
 const SQLITE_CLOUD_API_DETAILS = SQLITECLOUD_URL + "/v2/tokens/details";
 const SQLITE_CLOUD_API_QUERY = SQLITECLOUD_URL + "/v2/weblite/sql";

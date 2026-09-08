@@ -8,7 +8,7 @@ To use the search component, [you need to initialize](#edge-function) it by pass
 import { useDocsSearch } from ./index";
 
 function Search() {
-  const searchUrl = "https://myhost.sqlite.cloud:8090/v2/functions/search-js";
+  const searchUrl = "https://myproject.myzone.gateway.sqlite.cloud/v2/functions/search-js";
 
   // Initialize the useSqlcSearch custom hook
   const {
